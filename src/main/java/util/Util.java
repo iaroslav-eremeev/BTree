@@ -6,16 +6,18 @@ import java.util.InputMismatchException;
 import java.util.Objects;
 
 public class Util {
+
     public void newHead(String[] args){
-        if (args.length > 1) throw new InputMismatchException("Too many arguments!");
-        if (args.length == 0) throw new InputMismatchException("Not enough arguments!");
+        if (args.length > 1) throw new InputMismatchException("Too many arguments! " +
+                "To create new head type only one unique name!");
+        else if (args.length == 0) throw new InputMismatchException("Not enough arguments!");
         else {
             Entry headEntry = new Entry(args[0]);
         }
     }
 
-    /*public Entry newChild(String parent, String child){
-
+    /*public Entry newChild(String parent, String childName){
+        return new Entry(childName, parent);
     }*/
 
     /*public void treeBuilder(String[] args){

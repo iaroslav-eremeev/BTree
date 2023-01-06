@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Objects;
 
@@ -32,17 +33,23 @@ public class Entry {
         child.parent = this;
     }
 
-    /*public Entry findEntry(String name) {
+    //TODO Спросить почему именно так? Почему не получалось return this после
+    // сравнения имен элементов списка - выдавало null
+    public Entry findEntry(String name) {
         Entry[] res = new Entry[1];
         findEntry(name, this, res);
         return res[0];
-    }*/
+    }
 
-    /*private void findEntry(String name, Entry current, Entry[] res) {
-        for (int i = 0; i < ; i++) {
-
+    public void findEntry(String name, Entry current, Entry[] res){
+        if (current.name.equals(name)) {
+            res[0] = current;
+            return;
         }
-    }*/
+        for (int i = 0; i < current.children.size(); i++) {
+            findEntry(name, current.children.get(i), res);
+        }
+    }
 
     public String getName() {
         return name;
@@ -65,28 +72,29 @@ public class Entry {
             }
         }
     }
-
-    @Override
-    public String toString() {
-        return "Entry{" +
-                "name='" + name + '\'' +
-                ", parent=" + parent +
-                ", children=" + children +
-                '}';
-    }
-
-    /**
-     * Написать программу, которая последовательно строит дерево иерархии объектов,
-     * слева направо и сверху вниз. Переход на новый уровень происходит от правого (последнего)
-     * объекта предыдущего уровня.
-     */
-
-    // Проверка уникальности имени объекта
+    // Checking if the name is unique
     public boolean checkUniqueName(Entry entry) {
         if (Objects.equals(entry.name, this.name)) return false;
         for (Entry child : this.children) {
             if (!checkUniqueName(child)) return false;
         }
         return true;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entry entry = (Entry) o;
+        return Objects.equals(name, entry.name) && Objects.equals(parent, entry.parent) && Objects.equals(children, entry.children);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, parent, children);
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

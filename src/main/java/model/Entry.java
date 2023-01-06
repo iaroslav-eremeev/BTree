@@ -29,6 +29,7 @@ public class Entry {
 
     public void addChild(Entry child) {
         this.children.add(child);
+        child.parent = this;
     }
 
     /*public Entry findEntry(String name) {
@@ -53,7 +54,7 @@ public class Entry {
 
     public void showChildren() {
         if (this.parent == null) System.out.println(this.name);
-        System.out.print(this.name);
+        if (this.children.size() != 0) System.out.print(this.name);
         if (this.children.size() > 0) {
             for (Entry child : this.children) {
                 System.out.print(" " + child.getName());

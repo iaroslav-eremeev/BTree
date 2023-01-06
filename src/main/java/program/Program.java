@@ -2,10 +2,13 @@ package program;
 
 import com.sun.security.jgss.GSSUtil;
 import model.Entry;
+import util.Util;
+
+import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
-        // Head of the hierarchy
+        /*// Head of the hierarchy
         Entry granddad = new Entry("Granddad");
         // Head's children, constructor by parent
         Entry dad = new Entry(granddad);
@@ -20,6 +23,10 @@ public class Program {
         // Uncle's child, constructor by name and parent together
         Entry cousin = new Entry("Cousin", uncle);
         // Show all the elements beginning from the head
-        granddad.showChildren();
+        granddad.showChildren();*/
+
+        // Testing treeBuilder
+        Scanner scanner = new Scanner(System.in);
+        Util.treeBuilder(scanner);
     }
 }

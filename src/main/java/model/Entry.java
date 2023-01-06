@@ -73,10 +73,12 @@ public class Entry {
         }
     }
     // Checking if the name is unique
-    public boolean checkUniqueName(Entry entry) {
-        if (Objects.equals(entry.name, this.name)) return false;
-        for (Entry child : this.children) {
-            if (!checkUniqueName(child)) return false;
+    public boolean checkUniqueName(String name) {
+        if (Objects.equals(name, this.name)) return false;
+        if (this.children.size() > 0){
+            for (Entry child : this.children) {
+                if (!checkUniqueName(child.getName())) return false;
+            }
         }
         return true;
     }

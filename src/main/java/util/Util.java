@@ -8,15 +8,6 @@ import java.util.Scanner;
 
 public class Util {
 
-    /*public Entry newHead(String[] args){
-        if (args.length > 1) throw new InputMismatchException("Too many arguments! " +
-                "To create new head type only one unique name!");
-        else if (args.length == 0) throw new InputMismatchException("Not enough arguments!");
-        else {
-            return new Entry(args[0]);
-        }
-    }*/
-
     public static void treeBuilder(Scanner scanner){
         System.out.println("Please start building the tree");
         System.out.println("First type the root object name");
@@ -33,9 +24,9 @@ public class Util {
                     throw new InputMismatchException("You should type only 2 names - " +
                             "first is for parent and second is for child");
                 }
-                /*if (!rootEntry.checkUniqueName(inputElements[1])) {
+                if (rootEntry.checkUniqueName(inputElements[1])) {
                     throw new InputMismatchException("Name of the child must be unique!");
-                }*/
+                }
                 Entry parent = rootEntry.findEntry(inputElements[0]);
                 parent.addChild(new Entry(inputElements[1]));
                 input = scanner.nextLine();

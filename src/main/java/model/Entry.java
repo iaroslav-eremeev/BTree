@@ -32,9 +32,6 @@ public class Entry {
         this.children.add(child);
         child.parent = this;
     }
-
-    //TODO Спросить почему именно так? Почему не получалось return this после
-    // сравнения имен элементов списка - выдавало null
     public Entry findEntry(String name) {
         Entry[] res = new Entry[1];
         findEntry(name, this, res);
@@ -74,14 +71,21 @@ public class Entry {
     }
     // Checking if the name is unique
     public boolean checkUniqueName(String name) {
-        if (Objects.equals(name, this.name)) return false;
-        if (this.children.size() > 0){
-            for (Entry child : this.children) {
-                if (!checkUniqueName(child.getName())) return false;
-            }
-        }
-        return true;
+        boolean[] res = new boolean[1];
+        checkUniqueName(name, this, res);
+        return res[0];
     }
+
+    public void checkUniqueName(String name, Entry current, boolean[] res){
+        if (current.name.equals(name)) {
+            res[0] = true;
+            return;
+        }
+        for (int i = 0; i < current.children.size(); i++) {
+            checkUniqueName(name, current.children.get(i), res);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
